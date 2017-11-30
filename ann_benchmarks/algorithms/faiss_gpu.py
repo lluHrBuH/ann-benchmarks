@@ -17,6 +17,7 @@ class FaissGPU(BaseANN):
         self._index = None
 
     def fit(self, X):
+        X = numpy.array(X)
         X = X.astype(numpy.float32)
         self._index = faiss.index_factory(len(X[0]), "IVF%d,PQ64" % self._n_bits)
         co = faiss.GpuClonerOptions()

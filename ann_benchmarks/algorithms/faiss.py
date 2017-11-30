@@ -13,9 +13,10 @@ class FaissLSH(BaseANN):
         self._index = None
 
     def fit(self, X):
+        X = numpy.array(X)	
         X = X.astype(numpy.float32)
-        self._index = faiss.IndexLSH(len(X[0]), self._n_bits)
-        self._index.train(X)
+        self._index = faiss.IndexLSH(len(X[0]), self._n_bits)     
+    self._index.train(X)
         self._index.add(X)
 
     def query(self, v, n):
@@ -43,6 +44,7 @@ class FaissIVF(BaseANN):
         self._metric = metric
 
     def fit(self, X):
+        X = numpy.array(X)
         if self._metric == 'angular':
             X = sklearn.preprocessing.normalize(X, axis=1, norm='l2')
 
@@ -51,7 +53,7 @@ class FaissIVF(BaseANN):
 
         self.quantizer = faiss.IndexFlatL2(X.shape[1])
         index = faiss.IndexIVFFlat(self.quantizer, X.shape[1], self._n_list, faiss.METRIC_L2)
-        index.train(X)
+    index.train(X)
         index.add(X)
         index.nprobe = self._n_probe
         self._index = index
