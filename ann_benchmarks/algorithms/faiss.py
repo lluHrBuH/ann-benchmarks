@@ -17,7 +17,7 @@ class FaissLSH(BaseANN):
         X = X.astype(numpy.float32)
         self._index = faiss.IndexLSH(len(X[0]), self._n_bits)     
     self._index.train(X)
-        self._index.add(X)
+    self._index.add(X)
 
     def query(self, v, n):
         return [label for label, _ in self.query_with_distances(v, n)]
@@ -53,7 +53,7 @@ class FaissIVF(BaseANN):
 
         self.quantizer = faiss.IndexFlatL2(X.shape[1])
         index = faiss.IndexIVFFlat(self.quantizer, X.shape[1], self._n_list, faiss.METRIC_L2)
-    index.train(X)
+        index.train(X)
         index.add(X)
         index.nprobe = self._n_probe
         self._index = index
