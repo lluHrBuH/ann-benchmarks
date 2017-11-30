@@ -37,7 +37,9 @@ __constructors = [
   ("ann_benchmarks.algorithms.dolphinnpy",
       ["DolphinnPy"]),
   ("ann_benchmarks.algorithms.datasketch",
-      ["DataSketch"])
+      ["DataSketch"]),
+  ("ann_benchmarks.algorithms.hdidx",
+      ["Hdidx"])
 ]
 
 available_constructors = {}

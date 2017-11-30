@@ -1,5 +1,10 @@
 float:
   any:
+    hdidx:
+      constructor: Hdidx
+      run-groups:
+        base:
+          args: [[2, 4, 8, 16, 32, 64, 128]]
     DolphinnPy:
       constructor: DolphinnPy
       run-groups:
