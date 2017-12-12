@@ -1,6 +1,6 @@
 FROM nvidia/cuda:8.0-devel-ubuntu16.04
 LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
-
+ENV DEBIAN_FRONTEND=noninteractive 
 RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 
 ENV CUDNN_VERSION 7.0.4.31
