@@ -39,7 +39,11 @@ __constructors = [
   ("ann_benchmarks.algorithms.datasketch",
       ["DataSketch"]),
   ("ann_benchmarks.algorithms.hdidx",
-      ["Hdidx"])
+      ["Hdidx"]),
+  ("ann_benchmarks.algorithms.n2",
+      ["N2"]),
+  ("ann_benchmarks.algorithms.lopq",
+      ["LOPQ"])
 ]
 
 available_constructors = {}

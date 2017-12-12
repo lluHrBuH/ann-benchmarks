@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
             libcudnn7-dev=$CUDNN_VERSION-1+cuda8.0 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN	apt-get update -y && apt-get install -y ruby git python-pip python-dev build-essential wget python-tk python-opencv
+RUN	apt-get update -y && apt-get install -y ruby git python-pip python-dev build-essential wget python-tk python-opencv python-matplotlib
 RUN pip install matplotlib Cython
 ADD	. ann-benchmarks
 WORKDIR	ann-benchmarks

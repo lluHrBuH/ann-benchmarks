@@ -1,10 +1,20 @@
 float:
   any:
+    lopq:
+      constructor: LOPQ
+      run-groups:
+        base:
+          args: [[4, 8]]
+    n2:
+      constructor: N2
+      run-groups:
+        base:
+          args: [[2, 4]]
     hdidx:
       constructor: Hdidx
       run-groups:
         base:
-          args: [[2, 4, 8, 16, 32, 64, 128]]
+          args: [[2, 4]]
     DolphinnPy:
       constructor: DolphinnPy
       run-groups:
