@@ -9,7 +9,7 @@ float:
       constructor: N2
       run-groups:
         base:
-          args: [[2, 4]]
+          args: [[2, 4, 8, 10, 12, 16, 20, 32, 60, 64]]
     hdidx:
       constructor: Hdidx
       run-groups:
@@ -215,129 +215,129 @@ float:
             - True
             - {"efSearch": [30, 25, 20, 15, 10, 5, 4, 3, 2, 1],
               "initSearchAttempts": 1}
-  angular:
-    kgraph:
-      constructor: KGraph
-      base-args: ["@metric"]
-      run-groups:
-        kgraph:
-          args: [[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                 {'reverse': -1, "K": 200, "L": 300, "S": 20}, False]
-    hnsw(nmslib):
-      constructor: NmslibReuseIndex
-      base-args: ["@metric", "hnsw"]
-      run-groups:
-        M-48:
-          arg-groups:
-            - {"M": 48, "post": 2, "efConstruction": 800}
-            - True # XXX: hard-codes save_index as True
-            - {"ef": [50, 70, 90, 120, 160, 200, 400, 600, 700, 800, 1000,
-              1400, 1600, 2000]}
-        M-32:
-          arg-groups:
-            - {"M": 32, "post": 2, "efConstruction": 800}
-            - True
-            - {"ef": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160,
-              200, 300, 400, 600, 700, 800, 1000, 1200, 1400, 1600, 2000]}
-        M-20:
-          arg-groups:
-            - {"M": 20, "post": 0, "efConstruction": 800}
-            - True
-            - {"ef": [2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
-        M-12:
-          arg-groups:
-            - {"M": 12, "post": 0, "efConstruction": 800}
-            - True
-            - {"ef": [1, 2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
-    SW-graph(nmslib):
-      constructor: NmslibReuseIndex
-      base-args: ["@metric", "sw-graph"]
-      run-groups:
-        NN-30:
-          arg-groups:
-            - {"NN": 30, "efConstruction": 800, "initIndexAttempts": 1}
-            - True
-            - {"efSearch": [700, 650, 550, 450, 350, 275, 200, 150, 120, 80,
-              50, 30], "initSearchAttempts": 1}
-        NN-15:
-          arg-groups:
-            - {"NN": 15, "efConstruction": 800, "initIndexAttempts": 1}
-            - True
-            - {"efSearch": [80, 50, 30, 20], "initSearchAttempts": 1}
-        NN-3:
-          arg-groups:
-            - {"NN": 3, "efConstruction": 800, "initIndexAttempts": 1}
-            - True
-            - {"efSearch": [120, 80, 60, 40, 20, 10, 8, 4, 2],
-              "initSearchAttempts": 1}
-    rpforest:
-      constructor: RPForest
-      run-groups:
-        base:
-          args: [[3, 5, 10, 20, 40, 100, 200, 400],
-                [3, 5, 10, 20, 40, 100, 200, 400]]
-    falconn:
-      constructor: FALCONN
-      base-args: ["@metric", 16]
-      run-groups:
-        base:
-          L: &l [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 21, 24, 27,
-             30, 33, 37, 41, 46, 51, 57, 63, 70, 77, 85, 94, 104, 115, 127,
-             140, 154, 170, 188, 207, 228, 251, 277, 305, 336, 370, 408, 449,
-             494, 544, 599, 659, 725, 798, 878, 966, 1063, 1170, 1287, 1416]
-          args: [*l]
-bit:
-  hamming:
-    falconn:
-      constructor: FALCONN
-      base-args: ["@metric", 16]
-      run-groups:
-        base:
-          args: [*l]
-    kgraph:
-      constructor: KGraph
-      base-args: ["@metric"]
-      run-groups:
-        kgraph:
-          args: [[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                 {'reverse': -1, "K": 200, "L": 300, "S": 20}, False]
-    hnsw(nmslib):
-      constructor: NmslibReuseIndex
-      base-args: ["@metric", "hnsw"]
-      run-groups:
-        M-48:
-          arg-groups:
-            - {"M": 48, "post": 2, "efConstruction": 800}
-            - True # XXX: hard-codes save_index as True
-            - {"ef": [50, 70, 90, 120, 160, 200, 400, 600, 700, 800, 1000,
-              1400, 1600, 2000]}
-        M-32:
-          arg-groups:
-            - {"M": 32, "post": 2, "efConstruction": 800}
-            - True
-            - {"ef": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160,
-              200, 300, 400, 600, 700, 800, 1000, 1200, 1400, 1600, 2000]}
-        M-20:
-          arg-groups:
-            - {"M": 20, "post": 0, "efConstruction": 800}
-            - True
-            - {"ef": [2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
-        M-12:
-          arg-groups:
-            - {"M": 12, "post": 0, "efConstruction": 800}
-            - True
-            - {"ef": [1, 2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
-int:
-  jaccard:
-    bf:
-      constructor: BruteForceBLAS
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: {}
-    datasketch:
-      constructor: DataSketch
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args:  [[16, 32, 64, 128],[5, 10, 20, 40]]
+#  angular:
+#    kgraph:
+#      constructor: KGraph
+#      base-args: ["@metric"]
+#      run-groups:
+#        kgraph:
+#          args: [[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+#                 {'reverse': -1, "K": 200, "L": 300, "S": 20}, False]
+#    hnsw(nmslib):
+#      constructor: NmslibReuseIndex
+#      base-args: ["@metric", "hnsw"]
+#      run-groups:
+#        M-48:
+#          arg-groups:
+#            - {"M": 48, "post": 2, "efConstruction": 800}
+#            - True # XXX: hard-codes save_index as True
+#            - {"ef": [50, 70, 90, 120, 160, 200, 400, 600, 700, 800, 1000,
+#              1400, 1600, 2000]}
+#        M-32:
+#          arg-groups:
+#            - {"M": 32, "post": 2, "efConstruction": 800}
+#            - True
+#            - {"ef": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160,
+#              200, 300, 400, 600, 700, 800, 1000, 1200, 1400, 1600, 2000]}
+#        M-20:
+#          arg-groups:
+#            - {"M": 20, "post": 0, "efConstruction": 800}
+#            - True
+#            - {"ef": [2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
+#        M-12:
+#          arg-groups:
+#            - {"M": 12, "post": 0, "efConstruction": 800}
+#            - True
+#            - {"ef": [1, 2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
+#    SW-graph(nmslib):
+#      constructor: NmslibReuseIndex
+#      base-args: ["@metric", "sw-graph"]
+#      run-groups:
+#        NN-30:
+#          arg-groups:
+#            - {"NN": 30, "efConstruction": 800, "initIndexAttempts": 1}
+#            - True
+#            - {"efSearch": [700, 650, 550, 450, 350, 275, 200, 150, 120, 80,
+#              50, 30], "initSearchAttempts": 1}
+#        NN-15:
+#          arg-groups:
+#            - {"NN": 15, "efConstruction": 800, "initIndexAttempts": 1}
+#            - True
+#            - {"efSearch": [80, 50, 30, 20], "initSearchAttempts": 1}
+#        NN-3:
+#          arg-groups:
+#            - {"NN": 3, "efConstruction": 800, "initIndexAttempts": 1}
+#            - True
+#            - {"efSearch": [120, 80, 60, 40, 20, 10, 8, 4, 2],
+#              "initSearchAttempts": 1}
+#    rpforest:
+#      constructor: RPForest
+#      run-groups:
+#        base:
+#          args: [[3, 5, 10, 20, 40, 100, 200, 400],
+#                [3, 5, 10, 20, 40, 100, 200, 400]]
+#    falconn:
+#      constructor: FALCONN
+#      base-args: ["@metric", 16]
+#      run-groups:
+#        base:
+#          L: &l [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 21, 24, 27,
+#             30, 33, 37, 41, 46, 51, 57, 63, 70, 77, 85, 94, 104, 115, 127,
+#             140, 154, 170, 188, 207, 228, 251, 277, 305, 336, 370, 408, 449,
+#             494, 544, 599, 659, 725, 798, 878, 966, 1063, 1170, 1287, 1416]
+#          args: [*l]
+#bit:
+#  hamming:
+#    falconn:
+#      constructor: FALCONN
+#      base-args: ["@metric", 16]
+#      run-groups:
+#        base:
+#          args: [*l]
+#    kgraph:
+#      constructor: KGraph
+#      base-args: ["@metric"]
+#      run-groups:
+#        kgraph:
+#          args: [[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+#                 {'reverse': -1, "K": 200, "L": 300, "S": 20}, False]
+#    hnsw(nmslib):
+#      constructor: NmslibReuseIndex
+#      base-args: ["@metric", "hnsw"]
+#      run-groups:
+#        M-48:
+#          arg-groups:
+#            - {"M": 48, "post": 2, "efConstruction": 800}
+#            - True # XXX: hard-codes save_index as True
+#            - {"ef": [50, 70, 90, 120, 160, 200, 400, 600, 700, 800, 1000,
+#              1400, 1600, 2000]}
+#        M-32:
+#          arg-groups:
+#            - {"M": 32, "post": 2, "efConstruction": 800}
+#            - True
+#            - {"ef": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160,
+#              200, 300, 400, 600, 700, 800, 1000, 1200, 1400, 1600, 2000]}
+#        M-20:
+#          arg-groups:
+#            - {"M": 20, "post": 0, "efConstruction": 800}
+#            - True
+#            - {"ef": [2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
+#        M-12:
+#          arg-groups:
+#            - {"M": 12, "post": 0, "efConstruction": 800}
+#            - True
+#            - {"ef": [1, 2, 5, 10, 15, 20, 30, 40, 50, 70, 80]}
+#int:
+#  jaccard:
+#    bf:
+#      constructor: BruteForceBLAS
+#      base-args: ["@metric"]
+#      run-groups:
+#        base:
+#          args: {}
+#    datasketch:
+#      constructor: DataSketch
+#      base-args: ["@metric"]
+#      run-groups:
+#        base:
+#          args:  [[16, 32, 64, 128],[5, 10, 20, 40]]
