@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
 def knn(dataset, run, epsilon=1e-10):
@@ -46,7 +47,7 @@ def candidates(queries, run):
 
 all_metrics = {
     "k-nn": {
-        "description": "Recall",
+        "description": u"Полнота",
         "function": knn,
         "worst": float("-inf"),
         "lim": [0.0, 1.03]
@@ -67,7 +68,7 @@ all_metrics = {
         "worst": float("inf")
     },
     "qps": {
-        "description": "Queries per second (1/s)",
+        "description": u"Количество запросов в секунду (1/s)",
         "function": queries_per_second,
         "worst": float("-inf")
     },

@@ -46,18 +46,19 @@ def _get_leaf_paths(path):
 
 def _leaf_path_to_descriptor(path):
     directory, _ = os.path.split(path)
-    parts = directory.split(os.sep)[1:]
+    parts = directory.split(os.sep)[0:]
     descriptor = {
         "file": os.path.basename(path)
     }
     for part in parts:
         try:
             name, value = part.split("=", 1)
-            if name == "k":
+            print(part,name, value)
+            if name == "results/k" or name=='k':
                 value = int(value)
             # Some of the names in the hierarchy aren't the names used in the
             # descriptor; fix those up
-            if name == "k":
+            if name == "results/k" or name=='k':
                 name = "count"
             elif name == "algo":
                 name = "algorithm"
@@ -75,6 +76,7 @@ def enumerate_result_files(dataset=None, count=None, distance=None, algo=None):
         else:
             return descv in argv
     def _matches_all(desc):
+        print(desc)
         return _matches(count, desc["count"]) and \
                _matches(dataset, desc["dataset"]) and \
                _matches(distance, desc["distance"]) and \

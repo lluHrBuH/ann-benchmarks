@@ -32,9 +32,12 @@ def create_plot(all_data, golden, raw, x_log, y_log, xn, yn, fn_out, linestyles)
         plt.gca().set_xscale('log')
     if y_log:
         plt.gca().set_yscale('log')
-    plt.gca().set_title(get_plot_label(xm, ym))
+    #plt.gca().set_title(get_plot_label(xm, ym))
+    #plt.gca().set_ylabel(ym['description'])
+    #plt.gca().set_xlabel(xm['description'])
     plt.gca().set_ylabel(ym['description'])
     plt.gca().set_xlabel(xm['description'])
+    
     box = plt.gca().get_position()
     # plt.gca().set_position([box.x0, box.y0, box.width * 0.8, box.height])
     plt.gca().legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), prop={'size': 9})
