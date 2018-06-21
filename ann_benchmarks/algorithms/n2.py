@@ -24,9 +24,9 @@ class N2(BaseANN):
 
     def query(self, v, n):
         v = v.astype(numpy.float32)
-        print(v)
-        print(n)
-        print("-----------------------------------")
+        #print(v)
+        #print(n)
+        #print("-----------------------------------")
         nns = self._index.search_by_vector(v,n)
         #print("[search_by_vector]: Nearest neighborhoods of vector {}: {}".format(v, nns))
         return nns
