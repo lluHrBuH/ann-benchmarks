@@ -14,7 +14,7 @@ float:
       constructor: Hdidx
       run-groups:
         base:
-          args: [[2, 4]]
+          args: [[2, 4, 8]]
     DolphinnPy:
       constructor: DolphinnPy
       run-groups:
@@ -92,14 +92,14 @@ float:
           # This run group produces (3 * 12 =) 36 algorithm instances:
           # Annoy("angular", 100, 100), Annoy("angular", 100, 200), and so on
           # up to Annoy("angular", 400, 400000).
-    nearpy:
-      constructor: NearPy
-      base-args: ["@metric"]
-      run-groups:
-        nearpy:
-          args: [[10, 12, 14, 16], [5, 10, 20, 40]]
-        extra:
-          args: [16, [5, 10, 15, 20, 25, 30, 40]]
+    # nearpy:
+    #   constructor: NearPy
+    #   base-args: ["@metric"]
+    #   run-groups:
+    #     nearpy:
+    #       args: [[10, 12, 14, 16], [5, 10, 20, 40]]
+    #     extra:
+    #       args: [16, [5, 10, 15, 20, 25, 30, 40]]
     bruteforce:
       constructor: BruteForce
       base-args: ["@metric"]
