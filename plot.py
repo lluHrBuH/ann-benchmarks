@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import os
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 import argparse
-
+plt.rc('font', family='Arial')
 from ann_benchmarks.datasets import get_dataset
 from ann_benchmarks.results import get_results
 from ann_benchmarks.plotting.metrics import all_metrics as metrics
