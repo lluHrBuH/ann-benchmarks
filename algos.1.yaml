@@ -9,7 +9,7 @@ float:
       constructor: N2
       run-groups:
         base:
-          args: [[20, 32, 60, 64]]
+          args: [[2, 4, 8, 10, 12, 16, 20, 32, 60, 64]]
     hdidx:
       constructor: Hdidx
       run-groups:
@@ -19,7 +19,7 @@ float:
       constructor: DolphinnPy
       run-groups:
         base:
-          args: [[20000, 40000, 100000]]
+          args: [[10, 50, 100, 200, 1000, 2000, 10000, 20000, 40000, 100000]]
     faiss-lsh:
       # @constructor specifies the name of the Python constructor for this
       # algorithm's wrapper. Only the constructors explicitly specified in
@@ -30,7 +30,7 @@ float:
           # When @args is a list, the result is the Cartesian product of all of
           # the things it contains; entries that aren't a list will be treated
           # as lists of length one.
-          args: [[512, 1024, 2048, 4096]]
+          args: [[32, 64, 128, 256, 512, 1024, 2048, 4096]]
           # This run group will produce eight algorithm instances:
           # FaissLSH(32), FaissLSH(64), and so on up to FaissLSH(4096).
     faiss-ivf:
@@ -38,13 +38,13 @@ float:
       base-args: ["@metric"]
       run-groups:
         base:
-          args: [[ 200, 400, 800, 1000],
-                 [ 20, 50, 100, 200]]
+          args: [[5, 10, 20, 50, 100, 200, 400, 800, 1000],
+                 [1, 2, 3, 4, 5, 8, 10, 20, 50, 100, 200]]
     faiss-gpu:
       constructor: FaissGPU
       run-groups:
         base:
-          args: [[1024, 2048, 4096], [100, 200]]
+          args: [[32, 64, 128, 256, 512, 1024, 2048, 4096], [100, 200]]
 #    lshf:
 #      constructor: LSHF
 #      # The @base-args list specifies arguments that should always be prepended
@@ -71,7 +71,7 @@ float:
       base-args: ["@metric"]
       run-groups:
         flann:
-          args: [[0.97, 0.98, 0.99, 0.995]]
+          args: [[0.2, 0.5, 0.7, 0.8, 0.9, 0.95, 0.97, 0.98, 0.99, 0.995]]
 #    panns:
 #      constructor: PANNS
 #      base-args: ["@metric"]
@@ -87,7 +87,8 @@ float:
       base-args: ["@metric"]
       run-groups:
         annoy:
-          args: [[100, 200, 400], [20000, 40000, 100000, 200000, 400000]]
+          args: [[100, 200, 400], [100, 200, 400, 1000, 2000, 4000, 10000,
+                20000, 40000, 100000, 200000, 400000]]
           # This run group produces (3 * 12 =) 36 algorithm instances:
           # Annoy("angular", 100, 100), Annoy("angular", 100, 200), and so on
           # up to Annoy("angular", 400, 400000).
@@ -116,7 +117,7 @@ float:
       base-args: ["@metric"]
       run-groups:
         ball:
-          args: &treeargs [[200, 400, 1000]]
+          args: &treeargs [[10, 20, 40, 100, 200, 400, 1000]]
     kd:
       constructor: KDTree
       base-args: ["@metric"]
@@ -136,7 +137,8 @@ float:
         base:
           # When @args is a dictionary, algorithm instances will be generated
           # by taking the Cartesian product of all of its values.
-          args: {"tuneK": 10, "desiredRecall": [0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]}
+          args: {"tuneK": 10, "desiredRecall": [0.99, 0.97, 0.95, 0.9, 0.85, 0.8,
+                0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]}
           # This run group produces thirteen algorithm instances:
           # NmslibNewIndex("angular", "vptree", {"tuneK": 10,
           # "desiredRecall": 0.99}), NmslibNewIndex("angular", "vptree",
@@ -149,7 +151,7 @@ float:
       base-args: ["@metric"]
       run-groups:
         kgraph:
-          args: [[ 50, 60, 70, 80, 90, 100],
+          args: [[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                  {'reverse': -1}, True] # XXX: hard-codes save_index as True
     hnsw(nmslib):
       constructor: NmslibReuseIndex
@@ -168,34 +170,34 @@ float:
           arg-groups:
             - {"M": 32, "post": 2, "efConstruction": 400}
             - True # XXX: hard-codes save_index as True
-            - {"ef": [ 90, 100, 120, 140, 160, 200,
+            - {"ef": [20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 200,
               300, 400]}
         M-20:
           arg-groups:
             - {"M": 20, "post": 2, "efConstruction": 400}
             - True
-            - {"ef": [40, 50, 70, 80, 120, 200, 400]}
+            - {"ef": [2, 5, 10, 15, 20, 30, 40, 50, 70, 80, 120, 200, 400]}
         M-12:
           arg-groups:
             - {"M": 12, "post": 0, "efConstruction": 400}
             - True
-            - {"ef": [ 40, 50, 70, 80, 120]}
+            - {"ef": [1, 2, 5, 10, 15, 20, 30, 40, 50, 70, 80, 120]}
         M-4:
           arg-groups:
             - {"M": 4, "post": 0, "efConstruction": 400}
             - True
-            - {"ef": [ 50, 70, 90, 120]}
+            - {"ef": [1, 2, 5, 10, 20, 30, 50, 70, 90, 120]}
         M-8:
           arg-groups:
             - {"M": 8, "post": 0, "efConstruction": 400}
             - True
-            - {"ef": [70, 90, 120, 160]}
+            - {"ef": [1, 2, 5, 10, 20, 30, 50, 70, 90, 120, 160]}
     MP-lsh(lshkit):
       constructor: NmslibNewIndex
       base-args: ["@metric", "lsh_multiprobe"]
       run-groups:
         base:
-          args: {"desiredRecall": [ 0.7, 0.6, 0.5,
+          args: {"desiredRecall": [0.99, 0.97, 0.95, 0.9, 0.85, 0.8, 0.7, 0.6, 0.5,
                 0.4, 0.3, 0.2, 0.1], "H": 1200001, "T": 10, "L": 50, "tuneK": 10}
     SW-graph(nmslib):
       constructor: NmslibReuseIndex
@@ -205,12 +207,12 @@ float:
           arg-groups:
             - {"NN": 10, "efConstruction": 400}
             - True
-            - {"efSearch": [800, 400, 200, 100]}
+            - {"efSearch": [800, 400, 200, 100, 50, 30, 20, 15, 10]}
         NN-5:
           arg-groups:
             - {"NN": 5, "efConstruction": 400}
             - True
-            - {"efSearch": [30, 25, 20, 15, 10]}
+            - {"efSearch": [30, 25, 20, 15, 10, 5, 4, 3, 2, 1]}
 #  angular:
 #    kgraph:
 #      constructor: KGraph
