@@ -15,6 +15,7 @@ class DolphinnPy(BaseANN):
         self._index = None
 
     def fit(self, X):
+        X = numpy.array(X)	
         X = X.astype(numpy.float32)
         d = X.shape[1]
         self.m = findmean(X, d, 10)
